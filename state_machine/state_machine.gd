@@ -25,12 +25,6 @@ func add_transition(transition: Transition):
 func tick(delta):
 	var next_transition = null
 	
-	for transition in next_transitions:
-		if not transition.condition.call():
-			continue
-		
-		next_transition = transition
-	
 	for transition in any_transitions:
 		if transition.to == current_state:
 			continue
@@ -39,6 +33,15 @@ func tick(delta):
 			continue
 			
 		next_transition = transition
+		break
+	
+	if not next_transition:
+		for transition in next_transitions:
+			if not transition.condition.call():
+				continue
+			
+			next_transition = transition
+			break
 	
 	if next_transition:
 		do_transition(next_transition)

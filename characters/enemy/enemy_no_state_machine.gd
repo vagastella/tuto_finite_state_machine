@@ -29,7 +29,6 @@ func _process(delta):
 		
 		if get_real_velocity().length_squared() > 0.01:
 			animation = "running"
-		
 	else:
 		if watch_time_left > 0:
 			watch_time_left -= delta
@@ -100,3 +99,4 @@ func _on_body_exited(body: Node3D):
 		return
 		
 	sighted_hero = null
+	current_patrol_point = _get_nearest_patrol_point_index()
